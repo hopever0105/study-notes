@@ -1,31 +1,67 @@
-# 📚 study-notes
+<div align="center">
 
-> 🔒 비공개 학습 기록
+# 송호빈
 
-파이썬을 이용한 퀀트 투자 포트폴리오 만들기(이한열)의 실습 코드를 따라 쓰며 정리한 기록입니다. 다만, 해당 책이 2024년 버전으로 현재 실행되지 않는 경우가 많아 그 부분을 직접 교체 수정을 거쳤습니다. 
+**데이터 기반 가치투자 분석가**
+규칙을 세우고, 데이터로 검증합니다.
 
----
+![Univ](https://img.shields.io/badge/고려대학교-통계학과-8b0029)
+![Focus](https://img.shields.io/badge/Focus-Equity%20Research%20%26%20Quant-1f6feb)
+![Index](https://img.shields.io/badge/Index%20%26%20ETF-개발·분석-2da44e)
 
-## 📌 원칙
-
-- ✂️ 책 본문 설명과 장 번호는 제거하고 **코드만** 남겼습니다.
-- 📖 코드는 책의 것을 따른 것이며, 직접 작성한 작업물이 아닙니다.
-- 🔧 직접 수정·응용한 결과물은 [quant-strategy-lab](https://github.com/hopever0105/quant-strategy-lab)에 따로 있습니다.
-- 🔑 비밀번호, 계좌번호는 환경변수(`DB_PW`, `KIS_CANO`, `KIS_REAL_CANO`)로 대체했습니다.
+</div>
 
 ---
 
-## 📂 파일 (`code/`)
+## 🧭 About
 
-| 분류 | 개수 |
-|---|:---:|
-| 크롤링 | 2 |
-| 데이터 수집 | 3 |
-| 백테스트 | 1 |
-| 증권사 API | 1 |
-| 기술적 지표 | 1 |
-| 포트폴리오 구성 | 1 |
-| 팩터 전략 (밸류, 모멘텀, 마법공식, 멀티팩터) | 4 |
-| 종합본 | 1 |
+- 🎓 고려대학교 통계학과 심화전공 졸업
+- 📈 약 5년간 KOSPI 중심 실전투자 (탑다운 접근, 매매 전 근거 기록, 사후 복기)
+- 🔍 종목·섹터·매크로를 잇는 Top-down 리서치와 통계적 검증
+- 🧮 지수 산출 방법론을 직접 구현하고 ETF 상품으로 설계
 
-> ℹ️ 종합본은 팩터 전략 4개 파일과 내용이 겹칩니다.
+---
+
+## 📂 Projects
+
+| 저장소 | 설명 | 상태 |
+|---|---|---|
+| [📊 equity-research-portfolio](https://github.com/hopever0105/equity-research-portfolio) | 한국·글로벌 리서치 리포트 (매크로 → 섹터 → 기업), 완료 40종 | ✅ 운영 중 |
+| [🧺 etf-solution-lab](https://github.com/hopever0105/etf-solution-lab) | AI·반도체·전력 10종목 지수 개발 → 에너지 결합 ETF 기획 → 상장 ETF 98개 중복 구조 분석 | ✅ 지수·중복 분석 완료 · 🔨 ETF 기획 진행 |
+| [🏆 investment-contests](https://github.com/hopever0105/investment-contests) | DB금융투자 GAPS(팀장), 타임폴리오 투자대회 기록 | 🔨 정리 중 |
+| [⚙️ quant-strategy-lab](https://github.com/hopever0105/quant-strategy-lab) | 하이킨아시 신호 스캐너, 그레이엄·버핏 가치 검증, 시장 데이터 수집 코드 | 🔨 진행 중 |
+| 📚 study-notes | 퀀트 투자 책 실습 코드 정리 | 🔒 비공개 |
+
+### 🧺 대표 프로젝트: etf-solution-lab
+
+| 단계 | 내용 | 핵심 결과 |
+|---|---|---|
+| 1. 지수 개발 | 10종목, 단일 종목 25% 캡, 분기 정기변경, 일별 가격지수 | CAGR 32.3% · MDD -47.3% (2022-04 ~ 2026-10) |
+| 2. ETF 기획 | 주식 지수 80% + 에너지주 바스켓 20%, 분기 리셋 | MDD -37.5%, 변동성 -5.9%p (수익이 아니라 낙폭을 줄이는 상품) |
+| 3. 경쟁 ETF 분석 | 상장 ETF 98개의 구성종목 겹침과 수익률 상관 | 구성 겹침 ↔ 수익률 상관 스피어먼 0.715 |
+
+---
+
+## 🔭 Now
+
+- 국내 AI·반도체·전력 지수와 ETF 상품 기획 (고수익·고위험 ETF와 비교)
+- 하이킨아시 전략의 백테스트와 통계 검증 설계
+- 빅데이터분석기사 실기 준비
+
+---
+
+## 🛠️ Tools
+
+`SQL` · `R` · `Python` · `SPSS` · `Excel` · `Word` · `Access`
+
+---
+
+## 🏅 Certifications
+
+SQLD · ADsP · 금융투자분석사 · 투자자산운용사 · 재무위험관리사(국내 FRM) · 감정평가사 1차 합격
+
+---
+
+## 📧 Contact
+
+arlo0105@naver.com · hobeensong@gmail.com
