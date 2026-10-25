@@ -1,18 +1,17 @@
-#%% [Sector 1] 맷플롯립 라이브러리 호출 및 기본 그래프 출력 (Images 48~49)
+#%% 맷플롯립 라이브러리 호출 및 기본 그래프 출력 
 # 맷플롯립(matplotlib)은 파이썬의 대표적인 그래프 전문 라이브러리입니다[cite: 48].
 import matplotlib.pyplot as plt
 
 # 주피터 노트북 환경에서는 그래프를 결과 화면(라인 사이)에 바로 출력하기 위해 아래 명령어를 추가해야 합니다[cite: 48].
 # (노트북이 아닌 일반 .py 파일로 실행할 때는 새로운 창이 뜨면서 그래프가 보입니다)[cite: 49]
-%matplotlib inline
+# %matplotlib inline
 
-# 내용이 없는 빈 그래프 틀 출력[cite: 49]
-# plt.plot()
+# 내용이 없는 빈 그래프 틀 출력[cite: 49] plt.plot()
 
 # 그래프 사이즈 조절: plt.figure(figsize=(가로, 세로))[cite: 49]
 # 사이즈 조절을 별도로 하지 않은 기본 사이즈는 6x4 입니다[cite: 49].
 plt.figure(figsize=(10, 5)) # 10x5 사이즈의 그래프 껍데기 설정[cite: 49]
-# plt.plot()
+plt.plot()
 
 
 #%% [Sector 2] 넘파이를 활용한 데이터 생성 및 그래프 그리기 (Images 50~52)
@@ -33,6 +32,8 @@ y = np.random.randn(20)
 plt.figure(figsize=(10, 5)) 
 plt.plot(x, y)
 
+#%%
+plt.plot(y)
 
 #%% [Sector 3] rcParams를 이용한 전역 파라미터 설정 (Image 53)
 """
@@ -46,6 +47,8 @@ plt.rcParams['figure.figsize'] = (10, 5)
 # 이제 별도의 사이즈 지정 없이(plt.figure 생략) 바로 plot을 해도 크게 출력됩니다[cite: 53].
 # plt.plot(x, y)
 
+#%%
+plt.rcParams
 
 #%% [Sector 4] 그래프 모양 설정하기 (색상, 선, 마커) (Images 54~55)
 """
@@ -85,7 +88,7 @@ print(font_list)
 # 한글 세팅 완료 후 그래프 다시 그리기[cite: 57]
 # 색상=자주색, 선=점선, 마커=별모양, 마커사이즈=20[cite: 56]
 plt.plot(x, y, color='m', linestyle=':', marker='*', markersize=20)
-plt.title('제목') # 이제 한글이 정상적으로 출력됩니다[cite: 57].
+plt.title('앙앙') # 이제 한글이 정상적으로 출력됩니다[cite: 57].
 
 #%% [Sector 1] 그래프 꾸미기 심화 (그리드, 폰트 딕셔너리, 범례) (Images 58~61)
 # 1. 그리드(격자) 추가하기: 더 읽기 쉬운 그래프를 만들기 위해 plt.grid(True)를 사용합니다[cite: 58].
@@ -172,7 +175,7 @@ plt.show()
 #%% [Sector 4] Pandas 막대 그래프 (기본, 누적, 수평) (Images 64~66)
 # 1. 기본 수직 막대 그래프 그리기[cite: 64, 65]
 # 9월 1일부터 5일까지 데이터만 추출하여 그립니다[cite: 64].
-# df_stock[:5].plot.bar() 
+df_stock[:5].plot.bar() 
 
 # X축이 시간까지 표시되어 너무 길고 거슬리므로, 인덱스에서 날짜(.date) 부분만 잘라내어 X축 값으로 지정합니다[cite: 65].
 df_stock[:5].plot.bar(x=df_stock[:5].index.date)
@@ -342,7 +345,7 @@ from mpl_toolkits.mplot3d import Axes3D
 from matplotlib import cm
 import scipy.stats as stats
 
-# (이전 채팅에서 만든 time_to_maturity, call_price 함수가 메모리에 있다고 가정합니다.)
+
 # 테스트를 위해 변수 세팅[cite: 78]
 ttm = 0.3849 # time_to_maturity('2018-9-1', '2018-12-14')의 결과값 가정[cite: 78]
 r = 0.025    # 이자율[cite: 78]
@@ -496,23 +499,23 @@ plt.rcParams['axes.unicode_minus'] = False
 - 잔존만기, 이자율, 변동성 등은 고정하고 기초자산(S)과 행사가격(K)의 변화를 봅니다[cite: 88].
 """
 def call_delta(S, K, ttm, r, sigma):
-    d1 = (np.log(S / K) + (r + sigma**2 * 0.5) * ttm) / (sigma * np.sqrt(ttm))[cite: 88]
-    val = stats.norm.cdf(d1, 0.0, 1.0)[cite: 88]
-    return val[cite: 88]
+    d1 = (np.log(S / K) + (r + sigma**2 * 0.5) * ttm) / (sigma * np.sqrt(ttm))
+    val = stats.norm.cdf(d1, 0.0, 1.0)
+    return val
 
-K = np.arange(300, 350, 5)[cite: 88]
-S = np.arange(200, 400, 10)[cite: 88]
-K, S = np.meshgrid(K, S)[cite: 88]
-Z_delta = call_delta(S, K, 0.38, 0.02, 0.30)[cite: 88]
+K = np.arange(300, 350, 5)
+S = np.arange(200, 400, 10)
+K, S = np.meshgrid(K, S)
+Z_delta = call_delta(S, K, 0.38, 0.02, 0.30)
 
 # 델타 곡면 그래프 그리기[cite: 88, 89]
-# fig = plt.figure()
-# ax = fig.add_subplot(111, projection='3d')
-# surf = ax.plot_surface(S, K, Z_delta, cmap=cm.coolwarm, linewidth=1, antialiased=True, alpha=0.8)
-# ax.set_xlabel('기초자산(Underlying)'); ax.set_ylabel('행사가격(Strike)'); ax.set_zlabel('델타(Delta)')
-# ax.set_title('델타 곡면')
-# fig.colorbar(surf, shrink=0.5, aspect=5)
-# plt.show()
+fig = plt.figure()
+ax = fig.add_subplot(111, projection='3d')
+surf = ax.plot_surface(S, K, Z_delta, cmap=cm.coolwarm, linewidth=1, antialiased=True, alpha=0.8)
+ax.set_xlabel('기초자산(Underlying)'); ax.set_ylabel('행사가격(Strike)'); ax.set_zlabel('델타(Delta)')
+ax.set_title('델타 곡면')
+fig.colorbar(surf, shrink=0.5, aspect=5)
+plt.show()
 # 해석: 기초자산 가격이 높아질수록 델타가 1에 가까워지는 것을 확인할 수 있습니다[cite: 89].
 
 
@@ -524,86 +527,56 @@ Z_delta = call_delta(S, K, 0.38, 0.02, 0.30)[cite: 88]
 """
 def ndx(x):
     # N'(x) = (1 / sqrt(2*pi)) * e^(-x^2 / 2)[cite: 90]
-    return (np.exp(-1 * x**2 * 0.5) / np.sqrt(2 * np.pi))[cite: 91]
+    return (np.exp(-1 * x**2 * 0.5) / np.sqrt(2 * np.pi))
 
 def gamma(S, K, ttm, r, sigma):
-    d1 = (np.log(S / K) + (r + sigma**2 * 0.5) * ttm) / (sigma * np.sqrt(ttm))[cite: 91]
-    val = (ndx(d1)) / (S * sigma * np.sqrt(ttm))[cite: 91]
-    return val[cite: 91]
+    d1 = (np.log(S / K) + (r + sigma**2 * 0.5) * ttm) / (sigma * np.sqrt(ttm))
+    val = (ndx(d1)) / (S * sigma * np.sqrt(ttm))
+    return val
 
-# K_gamma = np.arange(300, 305)[cite: 91] # 책의 예시 (데이터 수가 적어 곡면이 좁게 나옴)[cite: 91]
-# S_gamma = np.arange(200, 400, 10)[cite: 91]
-# K_gamma, S_gamma = np.meshgrid(K_gamma, S_gamma)[cite: 91]
-# Z_gamma = gamma(S_gamma, K_gamma, 0.38, 0.02, 0.30)[cite: 91]
+K_gamma = np.arange(300, 305) 
+S_gamma = np.arange(200, 400, 10)
+K_gamma, S_gamma = np.meshgrid(K_gamma, S_gamma)
+Z_gamma = gamma(S_gamma, K_gamma, 0.38, 0.02, 0.30)
 # 해석: 등가격(기초자산 가격과 행사가격이 비슷한 지점) 주변에서 감마가 가장 높은 값을 나타냅니다[cite: 92].
 
 
 #%% [Sector 3] 옵션 그릭스 3: 세타(Theta) 3D 곡면 (Images 92~93)
 """
-세타(Theta)는 시간 경과에 따른 옵션 가격의 변화(시간가치)를 나타냅니다[cite: 92].
+세타(Theta)는 시간 경과에 따른 옵션 가격의 변화(시간가치)를 나타냅니다.
 잔존만기(ttm)가 0에 가까워지면서 그래프가 어떻게 변하는지 보기 위해 
-X축 값을 양수에서 0으로 거꾸로 흘러가게 출력하는 기법(ax.invert_xaxis)을 사용합니다[cite: 93, 94].
+X축 값을 양수에서 0으로 거꾸로 흘러가게 출력하는 기법(ax.invert_xaxis)을 사용합니다.
 """
 def call_theta(S, K, ttm, r, sigma):
-    d1 = (np.log(S / K) + (r + sigma**2 * 0.5) * ttm) / (sigma * np.sqrt(ttm))[cite: 92]
-    d2 = (np.log(S / K) + (r - sigma**2 * 0.5) * ttm) / (sigma * np.sqrt(ttm))[cite: 92]
-    val = -1 * ((S * ndx(d1) * sigma) / (2 * np.sqrt(ttm))) - r * K * np.exp(-r * ttm) * stats.norm.cdf(d2, 0.0, 1.0)[cite: 92]
-    return val[cite: 92]
+    d1 = (np.log(S / K) + (r + sigma**2 * 0.5) * ttm) / (sigma * np.sqrt(ttm))
+    d2 = (np.log(S / K) + (r - sigma**2 * 0.5) * ttm) / (sigma * np.sqrt(ttm))
+    val = -1 * ((S * ndx(d1) * sigma) / (2 * np.sqrt(ttm))) - r * K * np.exp(-r * ttm) * stats.norm.cdf(d2, 0.0, 1.0)
+    return val
 
-# T_theta = np.arange(1.0, 0.0, -0.01) # 잔존만기 1년에서 0년까지 0.01씩 감소[cite: 93]
-# S_theta = np.arange(350, 355)[cite: 93]
-# T_theta, S_theta = np.meshgrid(T_theta, S_theta)[cite: 93]
-# Z_theta = call_theta(S_theta, 350, T_theta, 0.02, 0.30)[cite: 93]
+T_theta = np.arange(1.0, 0.0, -0.01) # 잔존만기 1년에서 0년까지 0.01씩 감소
+S_theta = np.arange(350, 355)
+T_theta, S_theta = np.meshgrid(T_theta, S_theta)
+Z_theta = call_theta(S_theta, 350, T_theta, 0.02, 0.30)
 
-# 3D 그래프 세팅 시 축 거꾸로 출력하기[cite: 93]
-# ax.invert_xaxis() # X축을 1부터 0의 순서로 거꾸로 출력하여 시간의 흐름을 표현[cite: 93]
-# 해석: 날짜가 만기일(0)에 가까워질수록 세타가 급격히 감소합니다[cite: 94].
+# 3D 그래프 세팅 시 축 거꾸로 출력하기
+ax.invert_xaxis() # X축을 1부터 0의 순서로 거꾸로 출력하여 시간의 흐름을 표현
+# 해석: 날짜가 만기일(0)에 가까워질수록 세타가 급격히 감소합니다.
 
 
 #%% [Sector 4] 옵션 그릭스 4: 베가(Vega) 3D 곡면 (Images 94~95)
 """
-베가(Vega)는 변동성(Volatility) 변화에 따른 옵션 가격의 변화율입니다[cite: 94].
-- 감마와 마찬가지로 콜과 풋의 공식이 동일합니다[cite: 94].
+베가(Vega)는 변동성(Volatility) 변화에 따른 옵션 가격의 변화율입니다.
+- 감마와 마찬가지로 콜과 풋의 공식이 동일합니다.
 """
 def vega(S, K, ttm, r, sigma):
-    d1 = (np.log(S / K) + (r + sigma**2 * 0.5) * ttm) / (sigma * np.sqrt(ttm))[cite: 94]
+    d1 = (np.log(S / K) + (r + sigma**2 * 0.5) * ttm) / (sigma * np.sqrt(ttm))
     # d2는 공식에 직접 쓰이진 않지만 통상 같이 계산함[cite: 94]
-    val = (S * np.sqrt(ttm) * ndx(d1))[cite: 94]
-    return val[cite: 94]
+    val = (S * np.sqrt(ttm) * ndx(d1))
+    return val
 
-# V_vega = np.arange(0.05, 0.95, 0.01) # 변동성(V) 범위 지정[cite: 94]
-# S_vega = np.arange(350, 352)[cite: 94]
-# V_vega, S_vega = np.meshgrid(V_vega, S_vega)[cite: 94]
-# Z_vega = vega(S_vega, 350, 0.38, 0.02, V_vega)[cite: 94]
-# 해석: 변동성이 아주 낮은 구간(10% 미만)에서 베가가 급격히 올라가고, 변동성이 증가함에 따라 베가가 점점 감소합니다[cite: 95].
+# V_vega = np.arange(0.05, 0.95, 0.01) # 변동성(V) 범위 지정
+# S_vega = np.arange(350, 352)
+# V_vega, S_vega = np.meshgrid(V_vega, S_vega)
+# Z_vega = vega(S_vega, 350, 0.38, 0.02, V_vega)
+# 해석: 변동성이 아주 낮은 구간(10% 미만)에서 베가가 급격히 올라가고, 변동성이 증가함에 따라 베가가 점점 감소합니다.
 
-
-#%% [Sector 5] Chapter 18. 문자열 패턴을 찾아주는 정규 표현식 (re) (Images 96~97)
-"""
-수집한 자료(인터넷 스크래핑 등)에서 원하는 부분만 골라낼 때 유용한 라이브러리가 정규 표현식 모듈(re)입니다[cite: 96].
-
-<주요 명령어>[cite: 97]
-- re.match(패턴, 문자열): 문자열의 **시작**이 패턴과 일치하는지 조사 (없으면 None 반환)
-- re.search(패턴, 문자열): 문자열 **전체**에서 패턴과 일치하는 부분이 있는지 조사 (첫 인덱스 반환)
-- re.findall(패턴, 문자열): 일치하는 부분을 모두 찾아 **리스트**로 반환
-- re.split(구분자, 문자열): 구분자 기준으로 자른 후 리스트로 반환
-- re.sub(패턴, 대체문자, 문자열): 문자열에서 패턴을 찾아 대체
-- re.compile(패턴): 패턴을 미리 해석해두어 가독성/속도 향상
-"""
-
-# 실습 문자열 세팅[cite: 97]
-target_str = '이사원,오대리,구과장,육차장,정부장'[cite: 97]
-
-# 1. re.match: 시작점 검사[cite: 97]
-# target_str이 '이사원'으로 시작하므로 매치 객체와 인덱스 (0,3)을 반환[cite: 97]
-print(re.match('이사원', target_str)) 
-
-# '오대리'로 시작하지 않으므로 None(반환값 없음)을 반환[cite: 97]
-print(re.match('오대리', target_str)) 
-
-# 2. re.search: 전체 문자열에서 처음 나오는 패턴 위치 반환[cite: 97]
-# '이사원'은 맨 앞에 있으므로 match와 동일하게 (0,3) 반환[cite: 97]
-print(re.search('이사원', target_str))
-
-# match와 달리 전체를 뒤지므로 '오대리' 패턴을 찾아내어 인덱스 (4,7)을 반환[cite: 97]
-print(re.search('오대리', target_str))
