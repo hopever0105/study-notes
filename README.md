@@ -30,7 +30,7 @@
 | [🧺 etf-solution-lab](https://github.com/hopever0105/etf-solution-lab) | AI·반도체·전력 10종목 지수 개발 → 에너지 결합 ETF 기획 → 상장 ETF 98개 중복 구조 분석 | ✅ 지수·중복 분석 완료 · 🔨 ETF 기획 진행 |
 | [🏆 investment-contests](https://github.com/hopever0105/investment-contests) | DB금융투자 GAPS(팀장), 타임폴리오 투자대회 기록 | 🔨 정리 중 |
 | [⚙️ quant-strategy-lab](https://github.com/hopever0105/quant-strategy-lab) | 하이킨아시 신호 스캐너, 그레이엄·버핏 가치 검증, 시장 데이터 수집 코드 | 🔨 진행 중 |
-| 📚 study-notes | 퀀트 투자 책 실습 코드 정리 | 🔒 비공개 |
+| [📚 study-notes](https://github.com/hopever0105/study-notes) | Python · R 퀀트 실습 코드 — 데이터 수집 → 팩터 전략 → 포트폴리오 최적화 ([my-r-quant-study](my-r-quant-study)) | 🔨 진행 중 |
 
 ### 🧺 대표 프로젝트: etf-solution-lab
 

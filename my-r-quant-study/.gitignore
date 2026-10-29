@@ -1,0 +1,16 @@
+# R / RStudio
+.Rproj.user/
+.Rhistory
+.RData
+.Ruserdata
+.Renviron
+
+# 내려받은 원본 데이터·결과물 (용량 큼, 다시 만들 수 있음)
+data/*
+!data/.gitkeep
+output/*
+!output/.gitkeep
+
+# 로그
+logs/
+*.log

@@ -1,0 +1,3 @@
+# 이 파일을 .Renviron 으로 복사해서 값을 채운다 (.Renviron 은 GitHub에 올리지 않음)
+# 07_R_prices_financials.R 에서 사용 (https://opendart.fss.or.kr 에서 발급)
+DART_API_KEY=
