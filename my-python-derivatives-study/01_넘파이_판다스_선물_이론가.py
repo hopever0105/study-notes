@@ -103,7 +103,7 @@ print("v[1, :] (2행, 전체 열 데이터 추출):\n", v[1, :])
 # numpy는 하나의 배열에 동일한 형태만 가능
 # pandas는 하나의 데이터프레임에 다양한 데이터 가능
 # 1차원 데이터는 series, 2차원 데이터는 dataframe을 이용한다. 
-# freq='D'(매일), 'W'(매주), 'M'(매달) 등으로 주기 설정 가능 (기본값은 'D')[cite: 21].
+# freq='D'(매일), 'W'(매주), 'M'(매달) 등으로 주기 설정 가능 (기본값은 'D').
 import pandas as pd
 import numpy as np
 
@@ -136,24 +136,24 @@ print("\n날짜를 인덱스로 가진 시리즈(s):\n", s)
 s2 = pd.Series(prices) # S 대문자 주의 
 print("\n인덱스 미지정 시리즈(s2):\n", s2)
 
-# 시리즈에 데이터 추가: 시리즈명[인덱스] = 값[cite: 22]
+# 시리즈에 데이터 추가: 시리즈명[인덱스] = 값
 s2[3] = 1030 
 print("\n데이터가 추가된 s2:\n", s2)
 
-# [참고] 문자형과 숫자형의 차이[cite: 22]
+# [참고] 문자형과 숫자형의 차이
 # print('123' + '123')  # 결과: 123123 (문자열 연결)
 # print(123 + 123)      # 결과: 246 (수학 연산)
 
 
 #%% [Sector 6] 시리즈 인덱스 활용 및 데이터 추출
-# pd.to_datetime(): 문자 형식의 날짜를 연산 가능한 datetime 형식으로 변환합니다[cite: 23].
+# pd.to_datetime(): 문자 형식의 날짜를 연산 가능한 datetime 형식으로 변환합니다.
 s[pd.to_datetime('2018-12-04')] = 1030
 print("\n새로운 날짜 데이터가 추가된 시리즈(s):\n", s) #\n 은 줄바꿈을 의미한다. 
 
-# 데이터 추출 방법 1: 리스트나 배열처럼 위치 번호(순서)를 이용해 추출[cite: 23]
+# 데이터 추출 방법 1: 리스트나 배열처럼 위치 번호(순서)를 이용해 추출
 print("\ns[2] (3번째 데이터 추출):", s[2])
 
-# 데이터 추출 방법 2: 레이블(인덱스 이름)을 이용해 추출 (Pandas의 장점)[cite: 23]
+# 데이터 추출 방법 2: 레이블(인덱스 이름)을 이용해 추출 (Pandas의 장점)
 print("s['2018-12-03'] (해당 날짜 데이터 추출):", s['2018-12-03'])
 
 
@@ -164,11 +164,11 @@ prices_dict = {'A전자': [1000, 1010, 1020],
                'B화학': [2000, 2010, 2020], 
                'C금융': [3000, 3010, 3020]}
 
-# 딕셔너리를 데이터프레임으로 변환 (인덱스 자동 지정: 0, 1, 2)[cite: 24]
+# 딕셔너리를 데이터프레임으로 변환 (인덱스 자동 지정: 0, 1, 2)
 df1 = pd.DataFrame(prices_dict)
 print("\n데이터프레임 생성(df1):\n", df1)
 
-# 인덱스에 사용할 날짜를 지정하여 데이터프레임 생성[cite: 24]
+# 인덱스에 사용할 날짜를 지정하여 데이터프레임 생성
 df2 = pd.DataFrame(prices_dict, index=dates)
 print("\n날짜 인덱스가 지정된 데이터프레임(df2):\n", df2)
 
@@ -197,50 +197,50 @@ print("\ndf2['A전자']['2018-12-01'] (열 선택 후 행 선택):", df2['A전�
 df2['D엔터'] = [4000, 4010, 4020]
 print("\nD엔터 열이 추가된 df2:\n", df2)
 
-# 새로운 종목(열) 추가 2: 기존에 만든 시리즈(s)를 이용해 추가[cite: 27]
-# (인덱스가 일치하는 데이터만 알아서 매칭되어 들어갑니다)[cite: 27]
+# 새로운 종목(열) 추가 2: 기존에 만든 시리즈(s)를 이용해 추가
+# (인덱스가 일치하는 데이터만 알아서 매칭되어 들어갑니다)
 df2['E텔레콤'] = s
 print("\nE텔레콤 열(시리즈)이 추가된 df2:\n", df2)
 
-# pd.concat을 이용한 데이터프레임 확장 (axis=1은 가로(열) 방향 병합)[cite: 28]
+# pd.concat을 이용한 데이터프레임 확장 (axis=1은 가로(열) 방향 병합)
 """
 pd.concat(A,B,axis=1)
 
 A,B는 합쳐질 프레임 
 axis는 합치는 방향으로 0은 행, 1은 열을 의미한다. 
  """
-s.name = 'F소프트'  # 병합 전 시리즈에 이름을 지정해주면 열 이름이 됩니다[cite: 28].
-df2 = pd.concat([df2, s], axis=1) # df2와 s를 가로로 합침[cite: 29]
+s.name = 'F소프트'  # 병합 전 시리즈에 이름을 지정해주면 열 이름이 됩니다.
+df2 = pd.concat([df2, s], axis=1) # df2와 s를 가로로 합침
 print("\nF소프트가 병합된 df2:\n", df2)
 
 
 #%% [Sector 6] 데이터프레임 연산 및 행 추가 
-# 12월 1일 시세에 60원씩 더해서 12월 7일 시세 만들기[cite: 29]
-df3 = df2.iloc[0] + 60                      # 12월 1일 자 시세 추출 후 60 추가[cite: 29]
-df3.name = pd.to_datetime('20181207')       # 해당 데이터의 이름을 12월 7일로 레이블 지정[cite: 29]
+# 12월 1일 시세에 60원씩 더해서 12월 7일 시세 만들기
+df3 = df2.iloc[0] + 60                      # 12월 1일 자 시세 추출 후 60 추가
+df3.name = pd.to_datetime('20181207')       # 해당 데이터의 이름을 12월 7일로 레이블 지정
 
 
 df2 = pd.concat([df2, df3.to_frame().T])    
 print("\n12월 7일 데이터가 추가된 df2:\n", df2)
 
-# 12월 1일 시세에 50원씩 더해서 12월 6일 시세 만들기[cite: 30]
-df3_2 = df2.iloc[0] + 50                    # 12월 1일 자 시세 추출 후 50 추가[cite: 30]
-df3_2.name = pd.to_datetime('20181206')     # 해당 데이터의 이름을 12월 6일로 레이블 지정[cite: 30]
+# 12월 1일 시세에 50원씩 더해서 12월 6일 시세 만들기
+df3_2 = df2.iloc[0] + 50                    # 12월 1일 자 시세 추출 후 50 추가
+df3_2.name = pd.to_datetime('20181206')     # 해당 데이터의 이름을 12월 6일로 레이블 지정
 
-#  pd.concat 사용[cite: 30]
+#  pd.concat 사용
 df2 = pd.concat([df2, df3_2.to_frame().T])  
 print("\n12월 6일 데이터가 추가된 df2 (날짜가 역전됨):\n", df2)
 
 # [참고] 날짜(인덱스)가 7일 뒤에 6일이 와서 섞여 있으므로, 
-# 데이터프레임.sort_index()를 사용해 정렬해야 한다고 책에서 언급하며 끝납니다[cite: 30].
+# 데이터프레임.sort_index()를 사용해 정렬해야 한다고 책에서 언급하며 끝납니다.
 # df2 = df2.sort_index()
 
 
 
 
 #%% [Sector 1] 데이터프레임 정렬 및 특정 데이터 빼기
-# 인덱스(날짜)를 기준으로 오름차순(과거->최신) 정렬합니다[cite: 31].
-# axis=0은 행 방향을 의미하며, True(오름차순)가 기본값이므로 생략 가능합니다[cite: 31]
+# 인덱스(날짜)를 기준으로 오름차순(과거->최신) 정렬합니다.
+# axis=0은 행 방향을 의미하며, True(오름차순)가 기본값이므로 생략 가능합니다
 
 """ 
 데이터프레임.sort_index(axis=0 or 1 , ascending = True)
@@ -262,90 +262,90 @@ df2 = df2.sort_index(axis=0)
 
 df2.drop(pd.to_datetime('2018-12-06'))
 
-# 여러 행을 동시에 삭제할 때는 대괄호 []를 이용해 묶어줍니다[cite: 32].
+# 여러 행을 동시에 삭제할 때는 대괄호 []를 이용해 묶어줍니다.
 df2.drop([pd.to_datetime('2018-12-02'), pd.to_datetime('2018-12-06')])
 
-# 열 삭제: axis=1로 지정하여 가로축 종목명을 기준으로 삭제합니다[cite: 32].
+# 열 삭제: axis=1로 지정하여 가로축 종목명을 기준으로 삭제합니다.
 df2.drop('D엔터', axis=1)
-df2.drop(['C금융', 'E텔레콤'], axis=1) # 여러 열 동시 삭제[cite: 33]
+df2.drop(['C금융', 'E텔레콤'], axis=1) # 여러 열 동시 삭제
 
 
 #%% [Sector 2] 데이터프레임 보간법(결측기 처리) (Images 33~35)
-# 시세 정보가 없는 NaN(결측치) 데이터를 없애거나 다른 값으로 메웁니다[cite: 33].
+# 시세 정보가 없는 NaN(결측치) 데이터를 없애거나 다른 값으로 메웁니다.
 
 # 1. NaN이 포함된 행을 통째로 싹 지워버립니다
 df2.dropna()
 
-# 2. NaN 값을 일괄적으로 0으로 대체합니다[cite: 34].
+# 2. NaN 값을 일괄적으로 0으로 대체합니다.
 # 데이터프레임.fillna(대체값 또는 방법)
 # 값이 아닌 method = ffill or bfill이면 앞 or 뒤 값으로 변경한다. 
 df2.fillna(0)
 
 
 
-# 3. 빈칸을 앞의 값으로 채우기 (Forward Fill)[cite: 34]
-# 주가는 추가 거래가 없으면 전일 가격이 유지되므로 보통 이 방식을 사용합니다[cite: 34].
+# 3. 빈칸을 앞의 값으로 채우기 (Forward Fill)
+# 주가는 추가 거래가 없으면 전일 가격이 유지되므로 보통 이 방식을 사용합니다.
 # (※ 책의 df2.fillna(method='ffill') 대신 최신 표준 코드 적용)
 df2.ffill()
 
-# 4. 빈칸을 뒤의 값으로 채우기 (Backward Fill)[cite: 35]
-# 뒤에 오는 데이터가 더 중요한 경우 역방향으로 채워 넣습니다[cite: 35].
+# 4. 빈칸을 뒤의 값으로 채우기 (Backward Fill)
+# 뒤에 오는 데이터가 더 중요한 경우 역방향으로 채워 넣습니다.
 # (※ 책의 df2.fillna(method='bfill') 대신 최신 표준 코드 적용)
 df2.bfill()
 
 
 #%% [Sector 3] 엑셀 데이터 읽어오기 (Chapter 11 시작) (Images 36~38)
-# 팬더스를 이용해 엑셀 파일에서 데이터를 읽어와 데이터프레임(df)에 저장합니다[cite: 36, 37].
+# 팬더스를 이용해 엑셀 파일에서 데이터를 읽어와 데이터프레임(df)에 저장합니다.
 # (실제 실행하려면 같은 폴더 안에 엑셀 파일이 있어야 합니다)
 
 file_path = '09.2 KOSPI200 F 201712.xlsx' 
 try:
-    # sheet_name='Sheet1'을 지정하고, '일자' 칼럼을 인덱스로 불러옵니다[cite: 37].
+    # sheet_name='Sheet1'을 지정하고, '일자' 칼럼을 인덱스로 불러옵니다.
     df = pd.read_excel(file_path, sheet_name='Sheet1', index_col='일자')
 
-    # 엑셀에서 불러온 일자가 단순 문자 형식일 수 있으므로 날짜 형태(datetime)로 변환해 덮어씌웁니다[cite: 38].
+    # 엑셀에서 불러온 일자가 단순 문자 형식일 수 있으므로 날짜 형태(datetime)로 변환해 덮어씌웁니다.
     df.index = pd.to_datetime(df.index)
     
-    print("\n엑셀 데이터 인덱스 타입 확인:", type(df.index)) # DatetimeIndex로 잘 변환되었는지 확인[cite: 38]
+    print("\n엑셀 데이터 인덱스 타입 확인:", type(df.index)) # DatetimeIndex로 잘 변환되었는지 확인
 except FileNotFoundError:
     print(f"'{file_path}' 파일이 없어 엑셀 불러오기를 건너뜁니다.")
 
 
 #%% [Sector 4] 금융공학: KOSPI200 선물 이론가 산출 (연속복리 모델) (Images 39~40)
-# 선물 이론가 공식: F = S * e^((r-d)*t)[cite: 39]
-# (S: 현물가격, r: 이자율, d: 배당률, t: 잔존만기)[cite: 39]
+# 선물 이론가 공식: F = S * e^((r-d)*t)
+# (S: 현물가격, r: 이자율, d: 배당률, t: 잔존만기)
 
-# 잔존만기를 계산할 때 휴일을 제외한 '영업일'만 구하기 위해 넘파이의 np.busday_count를 이용합니다[cite: 39].
+# 잔존만기를 계산할 때 휴일을 제외한 '영업일'만 구하기 위해 넘파이의 np.busday_count를 이용합니다.
 def futures_price(S, r, d, T, t0):
-    # 금융공학에서는 1년을 보통 252일로 계산하므로 남은 날짜 수를 252로 나눕니다[cite: 39].
+    # 금융공학에서는 1년을 보통 252일로 계산하므로 남은 날짜 수를 252로 나눕니다.
     # (최신 버전에 맞춰 .date()를 붙여 오류를 방지했습니다)
     t = np.busday_count(t0.date(), T.date()) / 252  # busday는 휴일을 제외한 날짜를 불러오는 것을 의미함. 
-    F = S * np.exp((r - d) * t)   # 자연지수는 np.exp()를 사용합니다[cite: 39].
+    F = S * np.exp((r - d) * t)   # 자연지수는 np.exp()를 사용합니다.
     return F
 
-T = pd.to_datetime('2017-12-14')  # 2017년 12월 만기 상품의 최종거래일[cite: 39]
-r = 0.0225                        # 이자율 2.25%[cite: 39]
-d = 0.015                         # 배당률 1.5%[cite: 39]
+T = pd.to_datetime('2017-12-14')  # 2017년 12월 만기 상품의 최종거래일
+r = 0.0225                        # 이자율 2.25%
+d = 0.015                         # 배당률 1.5%
 
 # 위 Sector 3에서 엑셀 데이터(df)를 성공적으로 불러왔다면 아래 연산을 수행합니다.
 if 'df' in locals() and not df.empty:
     for n in df.index:
-        t0 = n                    # 기준일자[cite: 39]
-        S = df.loc[n, '지수']       # 해당 일자의 현물 지수[cite: 39]
+        t0 = n                    # 기준일자
+        S = df.loc[n, '지수']       # 해당 일자의 현물 지수
         F = futures_price(S, r, d, T, t0)
         
-        # 가독성을 위해 천의 자리마다 쉼표(,)를 찍고 소수점 아래 두 자리까지 표시하도록 포매팅합니다[cite: 40].
+        # 가독성을 위해 천의 자리마다 쉼표(,)를 찍고 소수점 아래 두 자리까지 표시하도록 포매팅합니다.
         f_formatted = '{:,.2f}'.format(F)
         
-        # '이론가1'이라는 새로운 칼럼을 만들어 값을 추가합니다[cite: 40].
+        # '이론가1'이라는 새로운 칼럼을 만들어 값을 추가합니다.
         df.loc[n, '이론가1'] = f_formatted  
 
 
 #%% 보급형 공식을 이용한 선물 이론가 산출 (단리 모델) (Image 40)
-# 단순 보급형 공식: F = S * [1 + (r-d) * (t / 365)][cite: 40]
+# 단순 보급형 공식: F = S * [1 + (r-d) * (t / 365)]
 
 def S_futures_price(S, r, d, T, t0):
-    # 연속복리와 달리 단순형은 1년을 365일로 잡으므로, 주말을 포함한 일수를 구하는 .days를 사용합니다[cite: 40].
+    # 연속복리와 달리 단순형은 1년을 365일로 잡으므로, 주말을 포함한 일수를 구하는 .days를 사용합니다.
     t = (T - t0).days / 365
     F = S * (1 + (r - d) * t)
     return F
@@ -356,36 +356,36 @@ import numpy as np
 #%% [Sector 1] 보급형 공식을 이용한 선물 이론가 계산 마무리 (Image 41)
 # (이전 채팅의 df와 S_futures_price 함수가 메모리에 있다고 가정합니다)
 '''
-d = 0.015 # 배당률[cite: 41]
+d = 0.015 # 배당률
 for n in df.index:
     t0 = n
     S = df.loc[n, '지수']
-    F = S_futures_price(S, r, d, T, t0)  # 단리 보급형 함수 호출[cite: 41]
-    f = '{:,.2f}'.format(F)              # 이론가 숫자 포매팅[cite: 41]
-    df.loc[n, '이론가2'] = f               # '이론가2' 칼럼에 값 추가[cite: 41]
+    F = S_futures_price(S, r, d, T, t0)  # 단리 보급형 함수 호출
+    f = '{:,.2f}'.format(F)              # 이론가 숫자 포매팅
+    df.loc[n, '이론가2'] = f               # '이론가2' 칼럼에 값 추가
 
-print(df) # 결과 출력[cite: 41]
+print(df) # 결과 출력
 '''
 
 
 #%% [Sector 2] 엑셀에서 WTI 현물, 최근월물, 차근월물 데이터 읽어오기 (Images 42~43)
-# WTI(서부 텍사스 중질유) 데이터를 바탕으로 롤오버 비용이 손익에 미치는 영향을 모델링합니다[cite: 42].
-# 최근월물(Front): 만기를 앞두고 있는 선물[cite: 42].
-# 차근월물(Second): 다음 주기에 만기가 도래할 선물[cite: 42].
+# WTI(서부 텍사스 중질유) 데이터를 바탕으로 롤오버 비용이 손익에 미치는 영향을 모델링합니다.
+# 최근월물(Front): 만기를 앞두고 있는 선물.
+# 차근월물(Second): 다음 주기에 만기가 도래할 선물.
 
-# 엑셀 파일의 각 시트('Spot', 'Front', 'Second')에서 데이터를 불러오고 Date를 인덱스로 지정합니다[cite: 43].
+# 엑셀 파일의 각 시트('Spot', 'Front', 'Second')에서 데이터를 불러오고 Date를 인덱스로 지정합니다.
 # (실제 실행 시 '11.2 WTI.xlsx' 파일이 폴더에 있어야 합니다)
 try:
     df1 = pd.read_excel('11.2 WTI.xlsx', sheet_name='Spot', index_col='Date')
     df2 = pd.read_excel('11.2 WTI.xlsx', sheet_name='Front', index_col='Date')
     df3 = pd.read_excel('11.2 WTI.xlsx', sheet_name='Second', index_col='Date')
     
-    # 3개의 데이터프레임을 하나로 합칩니다 (axis=1은 가로로 병합)[cite: 43].
+    # 3개의 데이터프레임을 하나로 합칩니다 (axis=1은 가로로 병합).
     df_wti = pd.concat([df1, df2, df3], axis=1)
     
-    # 데이터에 구멍(NaN)이 난 곳을 메우는 보간법 수행 (최신 표준 메서드 적용)[cite: 43]
-    df_wti = df_wti.ffill()  # 앞의 데이터를 가져와 덮어씀 (method='ffill' 대체)[cite: 43]
-    df_wti = df_wti.bfill()  # 뒤의 데이터를 가져와 덮어씀 (method='bfill' 대체)[cite: 43]
+    # 데이터에 구멍(NaN)이 난 곳을 메우는 보간법 수행 (최신 표준 메서드 적용)
+    df_wti = df_wti.ffill()  # 앞의 데이터를 가져와 덮어씀 (method='ffill' 대체)
+    df_wti = df_wti.bfill()  # 뒤의 데이터를 가져와 덮어씀 (method='bfill' 대체)
     
     print("\nWTI 병합 데이터(df_wti) 꼬리부분 확인:\n", df_wti.tail())
 except FileNotFoundError:
@@ -393,13 +393,13 @@ except FileNotFoundError:
 
 
 #%% [Sector 3] 엑셀에서 WTI 만기일 정보 읽어오기 및 처리 (Images 44~45)
-# 롤오버는 대체로 만기일에 가까워지면 시행하므로 만기일 정보가 필요합니다[cite: 44].
+# 롤오버는 대체로 만기일에 가까워지면 시행하므로 만기일 정보가 필요합니다.
 try:
-    # 'Expiry' 시트에서 만기일 정보를 불러옵니다[cite: 44].
+    # 'Expiry' 시트에서 만기일 정보를 불러옵니다.
     df_e = pd.read_excel('11.2 WTI.xlsx', sheet_name='Expiry')
     
-    # 필요한 'Last Trade'(최종거래일) 열만 추출[cite: 44]
-    # 문자열로 되어 있을 수 있으므로 날짜 형식(datetime)으로 변환 후 시리즈로 저장합니다[cite: 44, 45].
+    # 필요한 'Last Trade'(최종거래일) 열만 추출
+    # 문자열로 되어 있을 수 있으므로 날짜 형식(datetime)으로 변환 후 시리즈로 저장합니다.
     expiry = pd.Series(pd.to_datetime(df_e['Last Trade']))
     print("\n만기일 정보(expiry) 확인:\n", expiry.head())
 except FileNotFoundError:
@@ -407,29 +407,29 @@ except FileNotFoundError:
 
 
 #%% [Sector 4] 시세 데이터프레임에 최종거래일 표시하기 (Image 46)
-# 롤오버 거래(최근월물 매도, 차근월물 매수)가 일어나는 최종거래일을 시세 데이터에 표시합니다[cite: 46].
+# 롤오버 거래(최근월물 매도, 차근월물 매수)가 일어나는 최종거래일을 시세 데이터에 표시합니다.
 
 if 'df_wti' in locals() and 'expiry' in locals():
-    # 1. 만기를 뜻하는 Expiry 칼럼을 만들고 초기값으로 NaN을 입력합니다[cite: 46].
+    # 1. 만기를 뜻하는 Expiry 칼럼을 만들고 초기값으로 NaN을 입력합니다.
     df_wti['Expiry'] = np.nan
     
-    # 2. Trading day 중 만기일을 찾아서 1로 표시합니다[cite: 46].
+    # 2. Trading day 중 만기일을 찾아서 1로 표시합니다.
     for d in df_wti.index:
-        # Date 값을 하나씩 읽어와서 expiry 시리즈에 같은 값이 있는지 확인[cite: 46]
+        # Date 값을 하나씩 읽어와서 expiry 시리즈에 같은 값이 있는지 확인
         if d in pd.to_datetime(expiry.values): 
-            df_wti.loc[d, 'Expiry'] = 1  # 만기일이면 1 표시[cite: 46]
+            df_wti.loc[d, 'Expiry'] = 1  # 만기일이면 1 표시
             
     print("\n만기일이 표시된 데이터(df_wti) 일부:\n", df_wti[5:10])
 
 
 #%% [Sector 5] 손익 계산: 현물에 투자했을 경우 (Image 46)
-# 현물은 만기라는 개념 없이 팔지 않으면 계속 들고 가는 상품이므로 단순히 (현재가 - 매입가)로 계산합니다[cite: 46].
+# 현물은 만기라는 개념 없이 팔지 않으면 계속 들고 가는 상품이므로 단순히 (현재가 - 매입가)로 계산합니다.
 
 if 'df_wti' in locals() and not df_wti.empty:
     try:
-        # 2017년 12월 28일 현물 현재가격[cite: 46]
+        # 2017년 12월 28일 현물 현재가격
         price_now = float(df_wti.loc['2017-12-28', 'Spot']) 
-        # 2010년 1월 4일 현물 초기가격[cite: 46]
+        # 2010년 1월 4일 현물 초기가격
         price_before = float(df_wti.loc['2010-01-04', 'Spot']) 
         
         profit = (price_now - price_before) * 1000
@@ -439,26 +439,26 @@ if 'df_wti' in locals() and not df_wti.empty:
 
 
 #%% [Sector 6] 손익 계산: 선물에 투자했을 경우 (롤오버 비용 반영) (Image 47)
-# 선물은 매달 만기가 있어 롤오버를 해야 하며, 이때 차근월물 가격 - 최근월물 가격 만큼의 비용이 발생합니다[cite: 47].
+# 선물은 매달 만기가 있어 롤오버를 해야 하며, 이때 차근월물 가격 - 최근월물 가격 만큼의 비용이 발생합니다.
 
 if 'df_wti' in locals() and not df_wti.empty:
     try:
-        roll_over_cost_acc = 0  # 롤오버 비용 누적값 초기화[cite: 47]
+        roll_over_cost_acc = 0  # 롤오버 비용 누적값 초기화
         
-        # 일자별로 순환하며 최종거래일(Expiry==1)이면 롤오버 비용을 계산하여 누적합니다[cite: 47].
+        # 일자별로 순환하며 최종거래일(Expiry==1)이면 롤오버 비용을 계산하여 누적합니다.
         for d in df_wti.index:
             if df_wti.loc[d, 'Expiry'] == 1:
-                # 롤오버 비용 = 차근월물 가격(Second) - 최근월물 가격(Front)[cite: 47]
+                # 롤오버 비용 = 차근월물 가격(Second) - 최근월물 가격(Front)
                 roll_over_cost = df_wti.loc[d, 'Second'] - df_wti.loc[d, 'Front']
-                roll_over_cost_acc = roll_over_cost_acc + roll_over_cost # 누적[cite: 47]
+                roll_over_cost_acc = roll_over_cost_acc + roll_over_cost # 누적
                 
         print("\n누적 롤오버 비용: '{:,.2f}'".format(roll_over_cost_acc))
         
-        # 롤오버 비용을 반영한 선물 손익 계산[cite: 47]
-        price_now_f = float(df_wti.loc['2017-12-28', 'Front'])   # 선물 현재가[cite: 47]
-        price_before_f = float(df_wti.loc['2017-12-28', 'Front'])# 책 오타로 추정됨 (보통 '2010-01-04'이어야 하지만 책 코드대로 작성)[cite: 47]
+        # 롤오버 비용을 반영한 선물 손익 계산
+        price_now_f = float(df_wti.loc['2017-12-28', 'Front'])   # 선물 현재가
+        price_before_f = float(df_wti.loc['2017-12-28', 'Front'])# 책 오타로 추정됨 (보통 '2010-01-04'이어야 하지만 책 코드대로 작성)
         
-        # 책 원본 코드 기준: profit = (price_now - price_before - roll_over_cost_acc) * 1000[cite: 47]
+        # 책 원본 코드 기준: profit = (price_now - price_before - roll_over_cost_acc) * 1000
         # (주의: 책의 2행 코드가 price_before = float(df['2017-12-28']['Front'])로 2017년으로 잘못 적혀 있는 것으로 보입니다. 
         # 논리상 2010-01-04가 맞지만 책의 코드 흐름을 그대로 남깁니다.)
         
