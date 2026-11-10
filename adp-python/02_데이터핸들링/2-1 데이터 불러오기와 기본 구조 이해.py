@@ -7,7 +7,7 @@ import numpy as np
 import pandas as pd
 
 dataset = np.array ([['삼성전자', 250000], ['삼성전기', 1000000]])
-df = pd.DataFrame(dataset, colums = ['name','price'])
+df = pd.DataFrame(dataset, columns = ['name','price'])
 df
 
 # 방법은 여러개다
@@ -88,7 +88,7 @@ iris.columns
 # append: 기존 인덱스 유지한 채 추가할 지 여부
 # inplace: 원본 데이터 프레임 직접 변경 여부
 
-iris.set_index('sepal length(cm)', drop = True, append = False, inplace= True)
+iris.set_index('sepal length (cm)', drop = True, append = False, inplace= True)
 iris.head()
 
 # 기존인덱스 제거 -> 기본 정수 인덱스 되돌리고자 할 때 reset_index 사용
