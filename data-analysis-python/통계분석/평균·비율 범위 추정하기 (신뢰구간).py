@@ -69,7 +69,7 @@ import pandas as pd
 import statsmodels.stats.api as sms
 
 # 0. 데이터 불러오기 — code는 글자로 읽어야 앞자리 0이 안 사라짐 (005930)
-df = pd.read_csv("../data/prices.csv",   # adp-python/04_통계분석 폴더에서 실행 기준
+df = pd.read_csv(r"C:\Users\arlo0\OneDrive\바탕 화면\취업\06_퀀트공부\연습데이터\prices.csv",
                  dtype={'code': str}, parse_dates=['date'])
 s = df[df['code'] == '005930'].sort_values('date').set_index('date')['close']   # 삼성전자 종가
 r = s.pct_change().dropna() * 100          # 일간 수익률(%) = (오늘/전날 - 1) × 100, 첫날은 빈칸이라 제거
@@ -93,7 +93,7 @@ print(f"95% 신뢰구간: [{ci[0]:.4f}%, {ci[1]:.4f}%]")        # [0.0855%, 0.63
 #       구간이 0보다 위에 있다 → 2025년엔 평균적으로 오른 해였다고 말할 수 있음
 
 
-# %% ② 비율의 점추정·구간추정 (교재의 불량률 예시와 같은 방법)
+# %% ② 비율의 점추정·구간추정 (불량률 예시와 같은 방법)
 n_total = len(r25)                   # 전체 거래일 242
 n_up = int((r25 > 0).sum())          # 오른 날 수 131  (True를 더하면 1로 셈)
 p_hat = n_up / n_total
