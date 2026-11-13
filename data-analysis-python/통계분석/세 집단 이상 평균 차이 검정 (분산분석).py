@@ -1,5 +1,14 @@
+# %% 0. 필요한 도구 불러오기 (F5 전체 실행 때 맨 먼저 돌아야 함)
+import numpy as np
+import pandas as pd
+import scipy.stats as stats
+import matplotlib.pyplot as plt
+from statsmodels.formula.api import ols
+from statsmodels.stats.anova import anova_lm
+from statsmodels.stats.multicomp import MultiComparison, pairwise_tukeyhsd
+from statsmodels.graphics.factorplots import interaction_plot
 
-#%% 
+#%%
 # ================================================================
 
 # ================================================================
@@ -132,15 +141,6 @@ plt.show()
 # 세 집단 이상 평균 차이 검정 (분산분석)
 # 언제 쓰나: 전략 3개 이상의 월수익률 평균이 정말 다른지, 증권사 3곳 체결 지연이 다른지,
 #            전략 × 시장 국면(상승장·하락장)처럼 두 기준을 같이 볼 때
-#%% 
-import numpy as np
-import pandas as pd
-import scipy.stats as stats
-import matplotlib.pyplot as plt
-from statsmodels.formula.api import ols
-from statsmodels.stats.anova import anova_lm
-from statsmodels.stats.multicomp import MultiComparison, pairwise_tukeyhsd
-from statsmodels.graphics.factorplots import interaction_plot
 
 # ================================================================
 # 0. 개념 정리 (숫자 예시)
