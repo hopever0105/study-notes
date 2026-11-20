@@ -23,6 +23,11 @@
 | 지도학습 | `전략_KNN_SVM_단기방향성예측.py` | SPY 다음 날 방향 KNN, 스케일링 파이프라인 + KNN·SVM 비교(삼성전자) |
 | 지도학습 | `전략_트리앙상블_시장트렌드예측.py` | SPY + GLD·TLT 피처 XGBoost 과적합 진단, TimeSeriesSplit + GridSearch, 정상성 피처 앙상블 백테스트 |
 | 비지도학습 | `전략_클러스터링_종목분류_포트폴리오.py` | 미국 주식 수익률 패턴 K-means(엘보), 국내 대형주 100종목 멀티팩터 군집 + 분산 포트폴리오 |
+| 기초 도구 | `날짜·시간 객체 다루기 (datetime·timedelta).py` | time·date·datetime·timedelta 범위와 변환, 보유 기간·연환산 수익률, 판다스 영업일·월말 날짜 |
+| 기초 도구 | `오픈 API 데이터 받기와 라이브러리 내부 살펴보기.py` | Nasdaq Data Link(옛 Quandl) get 인자, 여러 종목 표 종목별로 나눠 저장, FinanceDataReader 속 열어 보기, 네이버 일봉 리더 직접 구현 |
+| 기초 도구 | `금융 분석용 파이썬 라이브러리 모음.py` | statsmodels 회귀·베타, seaborn, plotly 캔들, BeautifulSoup·Selenium, TA-Lib(없으면 판다스), QuantEcon 시장 국면 마르코프 체인, 거래소 캘린더 |
+| 피처 | `경제지표·재무지표 뽑기 (금리차·VIX·달러·BEI·RSI·EV·ROE).py` | FRED·야후에서 장단기 금리차·VIX·TED/하이일드 스프레드·금·달러·BEI·한국 금리차 수집, MA60·거래량비율·RSI, 미래정보 없이 피처 표 합치기, EV/EBIT·ROA·ROE·PER 계산 |
+| 백테스트 | `백테스트 라이브러리 비교와 Backtrader RSI 전략.py` | Zipline·QuantConnect·Quantiacs·Backtrader 비교, QQQ RSI 30/70 전략, 샤프·낙폭·승률 분석기, 바이앤홀드 비교 |
 | 이론 | `머신러닝 투자 활용 개요 - 설명과 실습 계획.md`, `알고리즘 트레이딩.txt` | 머신러닝 투자 활용 사례·개념 정리와 실습 계획 |
 
 ## 실행
