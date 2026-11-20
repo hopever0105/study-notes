@@ -1,0 +1,44 @@
+#%% [0. 공통 환경 설정, 한글 폰트, 시드 고정 및 SQL DB 연결]
+from pathlib import Path
+import warnings
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sqlalchemy import create_engine
+
+warnings.filterwarnings('ignore')
+
+# 재현성을 위한 시드 고정
+SEED = 42
+np.random.seed(SEED)
+
+# 시각화 한글 폰트 및 마이너스 기호 깨짐 방지 (Windows 기준)
+plt.rcParams['font.family'] = 'Malgun Gothic'
+plt.rcParams['axes.unicode_minus'] = False
+plt.rcParams['figure.figsize'] = (12, 5)
+
+# 출력 옵션
+pd.set_option('display.max_columns', 30)
+pd.set_option('display.width', 1000)
+
+# SQL 데이터베이스 연결 (.env 로드)
+QUANT_DIR = Path(r'C:\Users\arlo0\OneDrive\바탕 화면\취업\quant')
+env = {}
+for line in (QUANT_DIR / '.env').read_text(encoding='utf-8').splitlines():
+    line = line.strip()
+    if line and not line.startswith('#') and '=' in line:
+        k, v = line.split('=', 1)
+        env[k.strip()] = v.strip()
+
+db_url = (
+    f"mysql+pymysql://{env['DB_USER']}:{env['DB_PASSWORD']}"
+    f"@{env['DB_HOST']}:{env.get('DB_PORT', 3306)}/{env['DB_NAME']}?charset=utf8mb4"
+)
+engine = create_engine(db_url)
+
+def load_sql(query: str) -> pd.DataFrame:
+    """SQL 쿼리를 실행하여 DataFrame으로 반환하는 헬퍼 함수"""
+    return pd.read_sql(query, engine)
+
+print("DB 연결 및 공통 환경 세팅 완료!")
