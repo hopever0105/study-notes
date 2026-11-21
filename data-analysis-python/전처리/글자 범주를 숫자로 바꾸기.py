@@ -1,66 +1,16 @@
 # -*- coding: utf-8 -*-
 # 글자 범주를 숫자로 바꾸기 (3-2 범주형 데이터 인코딩)
-# 1부: 책 원본 따라 치기 / 2부: 금융 데이터(prices.csv)로 같은 인코딩 연습
-# Spyder: F5 전체 실행 / Ctrl+Enter 현재 셀 실행 / F9 선택 줄 실행
-#
+
 # 언제 쓰나: 모델은 숫자만 받는다. '월요일', '상승장', '대형주' 같은 글자 범주를 숫자로 바꿀 때.
 #   - map            : 내가 정한 규칙대로 바꾸기 (묶기·순서 매기기)
 #   - factorize      : 범주마다 번호 붙이기 (0, 1, 2, ...)
 #   - cut / qcut     : 숫자를 구간으로 잘라 범주 만들기
 #   - get_dummies    : 범주마다 0/1 열 하나씩 (원-핫 인코딩)
 
-# =====================================================================
-# 1부. 책 원본
-# =====================================================================
-
-# %%
-import pandas as pd
-from sklearn.datasets import load_iris
-
-iris_load = load_iris()
-iris = pd.DataFrame(iris_load.data, columns=iris_load.feature_names)
-iris['Class'] = iris_load.target
-
-# 숫자 레이블을 문자열 범주로 변환
-iris['Class'] = iris['Class'].map({0: 'Setosa', 1: 'Versicolor', 2: 'Virginica'})
-
-# 나중에 쓰려고 사본 저장
-iris_origin = iris.copy()
-
-# %% map: 범주 묶기
-class_group = {'Setosa': 'Group_A', 'Versicolor': 'Group_B', 'Virginica': 'Group_B'}
-iris['Class_group'] = iris['Class'].map(class_group)
-print(iris[['Class', 'Class_group']].head())
-
-# %% factorize: 처음 나온 순서대로 0, 1, 2 번호
-iris['Class_label2'] = pd.factorize(iris['Class'])[0]
-print(iris[['Class', 'Class_label2']].head())
-
-# %% 문자열 첫 글자로 묶기
-iris['Class_initial'] = iris['Class'].str[0]
-print(iris[['Class', 'Class_initial']].head())
-
-# %% cut: 숫자를 정해진 경계로 잘라 범주로
-iris['petal_length_group'] = pd.cut(iris['petal length (cm)'],
-                                    bins=[0, 2, 5, 10],
-                                    labels=['Short', 'Medium', 'Long'])
-print(iris[['petal length (cm)', 'petal_length_group']].head())
-
-# %% get_dummies: 원-핫 인코딩 (범주 3개 → 0/1 열 3개)
-iris_dummy = pd.get_dummies(iris_origin, columns=['Class'])
-print(iris_dummy.head())
-
-# %% drop_first=True: 첫 범주 열을 빼서 2개만 (나머지 둘이 0이면 첫 범주라는 뜻)
-iris_onehot = pd.get_dummies(iris_origin, columns=['Class'], drop_first=True)
-print(iris_onehot.head())
-
-
-# =====================================================================
-# 2부. 금융판
-# =====================================================================
 
 # %% 데이터 + 기본 열
 import numpy as np
+import pandas as pd
 import statsmodels.formula.api as smf
 
 PATH = r'C:\Users\arlo0\OneDrive\바탕 화면\취업\06_퀀트공부\연습데이터\prices.csv'
@@ -155,3 +105,91 @@ summary = pd.DataFrame({
              '날짜별로 자르기', '상수항 있으면 drop_first', '어제까지만(shift(1))'],
 })
 print(summary.to_string(index=False))
+""" 
+범주형 데이터 인코딩
+
+범주형 데이터 : 범위 부류 서열 등으로 구분되는 질적 변수로 사칙연산 불가능
+명목형: 순서가 없는 변수
+순서형: 순서는 있는 변수 (교육수준, 만족도 등)
+
+Data Frame에서는 object나 Category로 저장
+숫자 형태더라도 수학적 의미가 없는 ID같은 경우가 범주형 변수임. (ID는 아예변수에서 제외하기도 함)
+
+대부분의 머신러닝 알고리즘은 수치형 데이터를 요구하는 바, 범주형 데이터를 모델이 이해할 수 있는 숫자 형태로 변환 시켜야 한다.
+"""
+
+# %%
+from sklearn.datasets import load_iris
+
+iris_load = load_iris()
+iris = pd.DataFrame(iris_load.data, columns=iris_load.feature_names)
+iris['Class'] = iris_load.target
+
+# 숫자 레이블을 문자열 범주로 변환
+iris['Class'] = iris['Class'].map({0: 'Setosa', 1: 'Versicolor', 2: 'Virginica'})
+
+# 나중에 쓰려고 사본 저장
+iris_origin = iris.copy()
+
+
+# %% map: 범주 묶기
+# 작은 범주를 큰 범주로 병합하기
+# 범주 수가 너무 많으면 모델 과적합 및 해석의 어려움 존재
+# 유사한 범주를 묶기
+class_group = {'Setosa': 'Group_A', 'Versicolor': 'Group_B', 'Virginica': 'Group_B'}
+iris['Class_group'] = iris['Class'].map(class_group)
+print(iris[['Class', 'Class_group']].head())
+
+# %% factorize: 처음 나온 순서대로 0, 1, 2 번호
+# 모델 안정성 향상, 해석용이성 증가 및 범주 수 감소 효과
+iris['Class_label2'] = pd.factorize(iris['Class'])[0]
+print(iris[['Class', 'Class_label2']].head())
+
+# %% 문자열 첫 글자로 묶기
+# 문자열 데이터를 필터링이나 패턴 추출통해 새로운 범주형 변수 생성 
+# 분석용 feature 생성에 매우 중요
+
+iris['Class_initial'] = iris['Class'].str[0]
+print(iris[['Class', 'Class_initial']].head())
+
+# %% cut: 숫자를 정해진 경계로 잘라 범주로
+# 숫자 데이터의 구간화 
+# 수치형은 원본 값을 유지하는 것이 구간화보다 일부 더 유리함 
+# 그러나 해석 용이성 향상, 비선형관계 단순화, 보고서용 요약 지표 생성등에서 수치형도 사용함
+iris['petal_length_group'] = pd.cut(iris['petal length (cm)'],
+                                    bins=[0, 2, 5, 10],
+                                    labels=['Short', 'Medium', 'Long'])
+print(iris[['petal length (cm)', 'petal_length_group']].head())
+
+#%% 
+""" 
+One - Hot 인코딩
+범주형 변수 각 범주를 독립적 컬럼으로 변환하고해당 범주 속하면 1, 아니면 0으로 표시
+대부분의 머신러닝 모델에서 사용
+다만 너무 나뉘는 범주가 많으면 계산량 많아진다는 단점
+
+코드 
+pd.get_dummies(data,columns = ['범주형1','범주형2'])
+"""
+# %% get_dummies: 원-핫 인코딩 (범주 3개 → 0/1 열 3개)
+iris_dummy = pd.get_dummies(iris_origin, columns=['Class'])
+print(iris_dummy.head())
+
+# %% drop_first=True: 첫 범주 열을 빼서 2개만 (나머지 둘이 0이면 첫 범주라는 뜻)
+# 다중 공선성 문제를 방지하기 위해 하나의 더미변수를 제거하는 것. 
+iris_onehot = pd.get_dummies(iris_origin, columns=['Class'], drop_first=True)
+print(iris_onehot.head())
+
+"""
+양자의 구분
+               레이블 인코딩  / one- hot 인코딩
+출력형태            정수            0 or 1
+순서의미            있음            없음
+메모리사용          적음            많음
+선형모델 적합성     낮음            높음
+트리모델 적합성     높음            높음
+추천 사용 상황    순서형 변수       명목형 변수, 선형모델, 신경망 모델
+추천 사용 상황    트리기반 모델     범주 수가 적을 때 
+"""
+
+
